@@ -16,4 +16,4 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch((err: Error) => console.log(err))
 
-  const password = 1234569810
+  const password = 123456981012
