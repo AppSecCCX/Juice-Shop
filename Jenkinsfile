@@ -1,5 +1,7 @@
 pipeline {
     agent any
+    docker { image 'python:3.8-buster' }
+    
     environment {
         SEMGREP_APP_TOKEN = '4397b2db11ac79b3fabc12c247406a1f036773a64a58d2d573cf5f320e311bae'
     }
