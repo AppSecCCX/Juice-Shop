@@ -1,7 +1,7 @@
 pipeline {
     agent any
         environment {
-            SEMGREP_APP_TOKEN = credentials('SEMGREP_APP_TOKEN')
+            SEMGREP_APP_TOKEN = 4397b2db11ac79b3fabc12c247406a1f036773a64a58d2d573cf5f320e311bae
         }
 
     stages {
