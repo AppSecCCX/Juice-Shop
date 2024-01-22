@@ -11,6 +11,7 @@ pipeline {
                 sh '<<Build Command>>'
             }
         }
+        
         stage('TEST') {
             steps {
                 echo 'Testing..'
