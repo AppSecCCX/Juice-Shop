@@ -11,14 +11,9 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                sh 'pip --version'
-            }
-        }
-
         stage('Semgrep-Scan') {
             steps {
+                sh 'python -m pip install -r requirements.txt'
                 sh 'pip3 install semgrep'
                 sh 'semgrep ci'
             }
