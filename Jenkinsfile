@@ -11,6 +11,12 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                sh 'pip --version'
+            }
+        }
+
         stage('Semgrep-Scan') {
             steps {
                 sh 'pip3 install semgrep'
