@@ -8,24 +8,23 @@ pipeline {
 
     stages {
 
-        // stage('Install packages') {
-        //     steps
-        //         // nodejs('install nodejs') {
-        //         sh 'npm install'
-        //         }
-        //     }
-        // }
+        stage('Install packages') {
+            steps
+                nodejs('install nodejs') {
+                sh 'npm install'
+                }
+            }
+        }
 
-    //     stage('Snyk') {
-    //         steps {
-    //             echo 'Testing...'
-    //             snykSecurity(
-    //             snykInstallation: 'Juiceshop',
-    //             snykTokenId: 'Juiceshop',
-    //             )
-    //     }
-    // }
-
+        stage('Snyk') {
+            steps {
+                echo 'Testing...'
+                snykSecurity(
+                snykInstallation: 'Juiceshop',
+                snykTokenId: 'Juiceshop',
+                )
+        }
+    }   
         stage('DEV') {
             steps {
                 echo 'Building..'
