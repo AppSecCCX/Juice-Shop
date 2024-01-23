@@ -13,7 +13,7 @@ pipeline {
 
                 nodejs('install nodejs') {
                 sh 'npm install'
-}
+                }
             }
         }
 
