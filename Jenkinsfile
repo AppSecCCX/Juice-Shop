@@ -1,18 +1,30 @@
 pipeline {
     agent any
+    
 
+    // tools {
+    //     nodejs '21.6.1'
+    // }
 
     stages {
 
-        stage('Snyk') {
-            steps {
-                echo 'Testing...'
-                snykSecurity(
-                snykInstallation: 'Juiceshop',
-                snykTokenId: 'Juiceshop',
-                )
-        }
-    }
+        // stage('Install packages') {
+        //     steps
+        //         // nodejs('install nodejs') {
+        //         sh 'npm install'
+        //         }
+        //     }
+        // }
+
+    //     stage('Snyk') {
+    //         steps {
+    //             echo 'Testing...'
+    //             snykSecurity(
+    //             snykInstallation: 'Juiceshop',
+    //             snykTokenId: 'Juiceshop',
+    //             )
+    //     }
+    // }
 
         stage('DEV') {
             steps {
