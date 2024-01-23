@@ -1,14 +1,16 @@
 pipeline {
     agent any 
-    tools {install nodejs "node"}
+    tools {
+        nodejs '21.6.1'
+    }
 
     stages {
 
         stage('node') {
-        steps {
-            sh 'npm config ls'
-      }
-    }
+            steps {
+                sh 'npm version'
+            }
+        }
 
         stage('DEV') {
             steps {
