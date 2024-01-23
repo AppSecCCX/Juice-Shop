@@ -8,12 +8,9 @@ pipeline {
 
     stages {
 
-        stage('node') {
-            steps {
-                sh 'sudo apt-get install nodejs'
-                sh 'npm i'
-            }
-        }
+        stage('Install packages') {
+  sh("docker run --user='Admin' --rm -v `pwd`:/app -w /app node yarn install")
+}
 
         stage('Snyk') {
             steps {
