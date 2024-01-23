@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     tools {
-        install nodejs '21.6.1'
+        nodejs '21.6.1'
     }
 
     stages {
