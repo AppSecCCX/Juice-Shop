@@ -1,5 +1,12 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'ubuntu'
+            args '-u root:sudo -v $HOME/workspace/Juiceshop:/Juiceshop'
+        }
+    }
+
+    
 
     // tools {
     //     nodejs '21.6.1'
