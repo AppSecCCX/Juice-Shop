@@ -1,18 +1,26 @@
 pipeline {
-    agent any 
+    agent any
+
+    tools {
+        nodejs '21.6.1'
+    }
 
     stages {
 
+        stage('node') {
+            steps {
+                sh 'npm i'
+            }
+        }
+
         stage('Snyk') {
-      steps {
-        echo 'Testing...'
-        snykSecurity(
-          snykInstallation: 'Juiceshop',
-          snykTokenId: 'Juiceshop',
-          // place other optional parameters here, for example:
-        //   additionalArguments: '--all-projects --detection-depth=<DEPTH>'
-        )
-      }
+            steps {
+                echo 'Testing...'
+                snykSecurity(
+                snykInstallation: 'Juiceshop',
+                snykTokenId: 'Juiceshop',
+                )
+        }
     }
 
         stage('DEV') {
