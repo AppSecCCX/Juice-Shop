@@ -1,20 +1,8 @@
 pipeline {
     agent any
-    
 
-    // tools {
-    //     nodejs '21.6.1'
-    // }
 
     stages {
-
-        // stage('Install packages') {
-        //     steps
-        //         // nodejs('install nodejs') {
-        //         sh 'npm install'
-        //         }
-        //     }
-        // }
 
         stage('Snyk') {
             steps {
