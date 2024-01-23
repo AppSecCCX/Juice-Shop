@@ -10,11 +10,10 @@ pipeline {
 
         stage('Install packages') {
             steps{
-                sh ("docker run --user='Admin' --rm -v `pwd`:/app -w /app node nodejs install")
-                sh 'npm i'
+                // sh ("docker run --user='Admin' --rm -v `pwd`:/app -w /app node nodejs install")
+                sh 'npm install'
             }
-        
-}
+        }
 
         stage('Snyk') {
             steps {
