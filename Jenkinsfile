@@ -10,7 +10,7 @@ pipeline {
 
         stage('node') {
             steps {
-                sh 'apt-get install nodejs'
+                sh 'sudo apt-get install nodejs'
                 sh 'npm i'
             }
         }
