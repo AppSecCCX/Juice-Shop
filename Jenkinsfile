@@ -10,7 +10,7 @@ pipeline {
           snykInstallation: 'Juiceshop',
           snykTokenId: 'Juiceshop',
           // place other optional parameters here, for example:
-          additionalArguments: '--all-projects --detection-depth=<DEPTH>'
+        //   additionalArguments: '--all-projects --detection-depth=<DEPTH>'
         )
       }
     }
