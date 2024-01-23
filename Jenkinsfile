@@ -9,7 +9,7 @@ pipeline {
     stages {
 
         stage('Install packages') {
-  sh("docker run --user='Admin' --rm -v `pwd`:/app -w /app node yarn install")
+        sh ("docker run --user='Admin' --rm -v `pwd`:/app -w /app node yarn install")
 }
 
         stage('Snyk') {
