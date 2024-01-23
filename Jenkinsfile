@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'jenkins-blueocean'
+            // image 'jenkins-blueocean'
             args '-u root:sudo -v $HOME/workspace/Juiceshop:/Juiceshop'
         }
     }
