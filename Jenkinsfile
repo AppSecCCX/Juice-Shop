@@ -1,7 +1,14 @@
 pipeline {
     agent any 
+    tools {nodejs "node"}
 
     stages {
+
+        stage('node') {
+        steps {
+            sh 'npm config ls'
+      }
+    }
 
         stage('DEV') {
             steps {
