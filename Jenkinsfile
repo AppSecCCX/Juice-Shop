@@ -9,7 +9,6 @@ pipeline {
 
         stage('node') {
             steps {
-                sh 'docker container exec -u 0 -it jenkins-blueocean bash'
                 sh 'apt-get install nodejs'
                 sh 'npm i'
             }
