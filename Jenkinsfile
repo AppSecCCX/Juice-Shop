@@ -10,20 +10,11 @@ pipeline {
 
         stage('Install packages') {
             steps
-                
-            }
-        }
-        
-    }   
-        stage('DEV') {
-            steps {
-                echo 'Building...'
                 nodejs('install nodejs') {
-                sh 'npm install'
+                sh 'npm prune'
                 }
             }
         }
-
         stage('Snyk') {
             steps {
                 echo 'Snyk...'
@@ -31,6 +22,12 @@ pipeline {
                 snykInstallation: 'Juiceshop',
                 snykTokenId: 'Juiceshop',
                 )
+        }
+    }   
+        stage('DEV') {
+            steps {
+                echo 'Building...'
+            }
         }
 
         stage('TEST') {
