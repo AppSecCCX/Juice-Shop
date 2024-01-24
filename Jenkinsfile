@@ -1,10 +1,5 @@
 pipeline {
     agent any
-    
-
-    // tools {
-    //     nodejs '21.6.1'
-    // }
 
     stages {
         
@@ -16,7 +11,7 @@ pipeline {
                 snykInstallation: 'Juiceshop',
                 snykTokenId: 'Juiceshop',
                 )
-        }
+            }
     }   
         stage('DEV') {
             steps {
