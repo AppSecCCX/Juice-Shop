@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage ('install node') {
+            steps {
+                sh 'npm i'
+            }
+        }
         
         stage('Snyk') {
             steps {
