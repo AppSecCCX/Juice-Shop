@@ -22,6 +22,7 @@ pipeline {
                 snykTokenId: 'Snyk-Scan',
                 additionalArguments: '--all-projects --detection-depth=1'
                 )
+                sh 'cat /var/jenkins_home/workspace/Juiceshop/*_snyk_report.json'
             }
         }
            
