@@ -3,7 +3,6 @@ pipeline {
 
     stages {
         
-        
         stage('Snyk') {
             steps {
                 echo 'Snyk...'
