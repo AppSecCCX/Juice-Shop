@@ -1,18 +1,18 @@
 pipeline {
     agent any
-    agent {
-        docker {
-            image 'node:20.11.0-alpine3.19' 
-            args '-p 3000:3000' 
-        }
-    }
+    // agent {
+    //     docker {
+    //         image 'node:20.11.0-alpine3.19' 
+    //         args '-p 3000:3000' 
+    //     }
+    // }
 
     stages {
-        stage ('install node') {
-            steps {
-                sh 'npm install'
-            }
-        }
+        // stage ('install node') {
+        //     steps {
+        //         sh 'npm install'
+        //     }
+        // }
     
         stage('Snyk') {
             steps {
