@@ -1,15 +1,15 @@
 pipeline {
     agent any
 
-     tools {
-        nodejs '21.6.1'
-    }
+    //  tools {
+    //     nodejs '21.6.1'
+    // }
 
     stages {
         stage('Install packages') {
             steps
                 nodejs('install nodejs') {
-                sh 'npm prune'
+                sh 'npm install'
                 }
             }
     
