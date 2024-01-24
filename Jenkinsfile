@@ -2,6 +2,9 @@ pipeline {
     agent any
     
     // tools {nodejs "node"}
+    environment {
+      SEMGREP_APP_TOKEN = credentials('semgrep-scan')
+    }
 
     stages {
         // stage ('install deps') {
@@ -22,9 +25,14 @@ pipeline {
                 snykTokenId: 'Snyk-Scan',
                 additionalArguments: '--all-projects --detection-depth=1'
                 )
-                sh 'cat /var/jenkins_home/workspace/Juiceshop/*_snyk_report.json'
             }
         }
+
+        stage('Semgrep-Scan') {
+        steps {
+          sh 'pip3 install semgrep'
+          sh 'semgrep ci'
+      }
            
         stage('DEV') {
             steps {
