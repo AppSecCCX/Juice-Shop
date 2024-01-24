@@ -1,15 +1,15 @@
 pipeline {
     agent any
-    
-    tools {nodejs "node"}
+
 
 
     stages {
-        stage ('install deps') {
-            steps {
-                sh 'npm install'
+        stage('Install packages') {
+            steps
+                nodejs('install nodejs') {
+                sh 'npm prune'
+                }
             }
-        }
     
         stage('Snyk') {
             steps {
