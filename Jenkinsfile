@@ -16,6 +16,13 @@ pipeline {
         //          sh 'npm install'
         //     }
         // }
+
+        stage('Semgrep-Scan') {
+            steps {
+            sh 'pip3 install semgrep'
+            sh 'semgrep ci'
+            }
+        }
     
         stage('Snyk') {
             steps {
@@ -28,12 +35,7 @@ pipeline {
             }
         }
 
-        stage('Semgrep-Scan') {
-            steps {
-            sh 'pip3 install semgrep'
-            sh 'semgrep ci'
-            }
-        }
+        
            
         stage('DEV') {
             steps {
