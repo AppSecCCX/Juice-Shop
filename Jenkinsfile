@@ -29,10 +29,11 @@ pipeline {
         }
 
         stage('Semgrep-Scan') {
-        steps {
-          sh 'pip3 install semgrep'
-          sh 'semgrep ci'
-      }
+            steps {
+            sh 'pip3 install semgrep'
+            sh 'semgrep ci'
+            }
+        }
            
         stage('DEV') {
             steps {
