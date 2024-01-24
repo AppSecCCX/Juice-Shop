@@ -1,10 +1,6 @@
 pipeline {
-    // agent any
+    agent any
 
-    agent {
-        docker { image 'python:3' }
-    } 
-    
     // tools {nodejs "node"}
     environment {
       SEMGREP_APP_TOKEN = credentials('semgrep-scan')
@@ -21,12 +17,6 @@ pipeline {
         //     }
         // }
 
-        stage('Semgrep-Scan') {
-            steps {
-            sh 'pip3 install semgrep'
-            sh 'semgrep ci'
-            }
-        }
     
         stage('Snyk') {
             steps {
