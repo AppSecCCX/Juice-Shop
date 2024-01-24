@@ -13,7 +13,7 @@ pipeline {
                 sh 'npm prune'
                 }
             }
-        }
+        
         stage('Snyk') {
             steps {
                 echo 'Snyk...'
