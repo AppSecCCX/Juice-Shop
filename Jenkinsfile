@@ -13,7 +13,7 @@ pipeline {
                 sh 'npm install'
             }
         }
-        
+    
         stage('Snyk') {
             steps {
                 echo 'Snyk...'
