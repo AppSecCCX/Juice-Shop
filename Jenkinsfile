@@ -8,8 +8,8 @@ pipeline {
             steps {
                 echo 'Snyk...'
                 snykSecurity(
-                snykInstallation: 'Juiceshop',
-                snykTokenId: 'Juiceshop',
+                snykInstallation: 'Snyk-Scan',
+                snykTokenId: 'Snyk-Scan',
                 )
             }
     }   
