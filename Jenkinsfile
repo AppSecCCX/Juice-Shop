@@ -7,7 +7,6 @@ pipeline {
     // }
 
     stages {
-
         stage('Install packages') {
             steps
                 nodejs('install nodejs') {
