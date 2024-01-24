@@ -3,7 +3,7 @@ pipeline {
 
     agent {
         docker { image 'python:3' }
-    }
+    } 
     
     // tools {nodejs "node"}
     environment {
