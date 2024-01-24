@@ -1,16 +1,22 @@
 pipeline {
     agent any
 
-    //  tools {
-    //     nodejs '21.6.1'
-    // }
+     tools {
+        nodejs '21.6.1'
+    }
 
     stages {
         stage('Install packages') {
-            steps
-                nodejs('install nodejs') {
-                sh 'npm install'
-                }
+            steps {
+//                 script {
+//                    docker.image('node:10-stretch').inside { c ->
+                        echo 'Building..'
+                        sh 'npm install'
+                        echo 'Testing..'
+                        sh 'npm test'
+//                         sh "docker logs ${c.id}"
+//                    }
+//                 }
             }
     
         stage('Snyk') {
