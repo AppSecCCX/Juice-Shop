@@ -3,7 +3,6 @@ pipeline {
     
     // tools {nodejs "node"}
 
-
     stages {
         stage ('install deps') {
             steps {
