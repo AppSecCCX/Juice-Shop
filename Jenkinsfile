@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-     tools {
-        nodejs '21.6.1'
-    }
-
     stages {
         stage('Install packages') {
             steps {
@@ -18,6 +14,7 @@ pipeline {
 //                    }
 //                 }
             }
+        }
     
         stage('Snyk') {
             steps {
