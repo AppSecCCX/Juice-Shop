@@ -1,9 +1,9 @@
 pipeline {
-    agent any
+    // agent any
 
-    // agent {
-    //     docker { image 'python:3' }
-    // }
+    agent {
+        docker { image 'python:3' }
+    }
 
     // tools {nodejs "node"}
     environment {
@@ -20,6 +20,17 @@ pipeline {
         //          sh 'npm install'
         //     }
         // }
+
+        stage('Unit test') {
+    steps {
+        sh '''
+            python -m venv .venv
+            . .venv/bin/activate
+            pip install -r requirements.txt
+            pytest -v
+        '''
+     }
+}
 
 
         stage('Semgrep-Scan') {
