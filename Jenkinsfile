@@ -17,31 +17,39 @@ pipeline {
         //     }
         // }
 
-        stage ('Check secrets') {
-    steps {
-        sh 'docker run  gesellix/trufflehog --json https://github.com/shubnimkar/CI_CD_Devsecops.git > trufflehog.json'
-
-        script {
-            def jsonReport = readFile('trufflehog.json')
-            
-            def htmlReport = """
-            <html>
-            <head>
-                <title>Trufflehog Scan Report</title>
-            </head>
-            <body>
-                <h1>Trufflehog Scan Report</h1>
-                <pre>${jsonReport}</pre>
-            </body>
-            </html>
-            """
-            
-            writeFile file: 'scanresults/trufflehog-report.html', text: htmlReport
+        stages {
+            stage('Semgrep-Scan') {
+                steps {
+                    sh 'pip3 install semgrep'
+                    sh 'semgrep ci'
+                }
+            }
         }
-        
-        archiveArtifacts artifacts: 'scanresults/trufflehog-report.html', allowEmptyArchive: true
-    }
-}
+
+        stage ('Check secrets') {
+            steps {
+                sh 'docker run  gesellix/trufflehog --json https://github.com/shubnimkar/CI_CD_Devsecops.git > trufflehog.json'
+
+                script {
+                    def jsonReport = readFile('trufflehog.json')
+                    
+                    def htmlReport = """
+                    <html>
+                    <head>
+                        <title>Trufflehog Scan Report</title>
+                    </head>
+                    <body>
+                        <h1>Trufflehog Scan Report</h1>
+                        <pre>${jsonReport}</pre>
+                    </body>
+                    </html>
+                    """
+                    
+                    writeFile file: 'scanresults/trufflehog-report.html', text: htmlReport
+                }
+                archiveArtifacts artifacts: 'scanresults/trufflehog-report.html', allowEmptyArchive: true
+            }
+        }
 
     
         stage('Snyk') {
