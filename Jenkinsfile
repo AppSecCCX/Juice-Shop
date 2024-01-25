@@ -2,7 +2,10 @@ pipeline {
     // agent any
 
     agent {
-        docker { image 'python:3' }
+       docker {
+      label "docker && linux" 
+      image "python:3.7"
+    }
     }
 
     // tools {nodejs "node"}
@@ -22,21 +25,26 @@ pipeline {
         // }
 
         stage('Unit test') {
-    steps {
-        sh '''
-            python -m venv .venv
-            . .venv/bin/activate
-            pip install -r requirements.txt
-            pytest -v
-        '''
-     }
+            steps {
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh "pip install -r requirements.txt --user"
+                    sh 'pip install --user semgrep'
+                }
+            }
+
+            post {
+                cleanup {
+                    cleanWs()
+                }
+                }
+        }
 
         stage('Semgrep-Scan') {
             steps {
                 // sh 'chmod +x /.cache/pip'
                 // sh 'chown -R user:Admin /.cache/pip'
                 // sh 'pip install --user --upgrade pip'
-                sh 'pip install --user semgrep'
+                
                 // sh 'pip install --user -r requirements.txt'
                 // sh 'semgrep ci'
                 sh 'semgrep --config=auto'
