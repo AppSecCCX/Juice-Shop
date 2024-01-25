@@ -24,6 +24,7 @@ pipeline {
         stage('Semgrep-Scan') {
             steps {
                 sh 'sudo pip3 install semgrep'
+                sh 'pip install --user -r requirements.txt'
                 sh 'semgrep ci'
             }
         }
