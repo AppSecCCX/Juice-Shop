@@ -30,8 +30,6 @@ pipeline {
     //         pytest -v
     //     '''
     //  }
-}
-
 
         stage('Semgrep-Scan') {
             steps {
