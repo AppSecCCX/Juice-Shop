@@ -33,7 +33,7 @@ pipeline {
                 snykSecurity(
                 snykInstallation: 'Snyk-Scan',
                 snykTokenId: 'Snyk-Scan',
-                // additionalArguments: '--all-projects --detection-depth=1'
+                additionalArguments: '--all-projects --detection-depth=3'
                 )
             }
         }
