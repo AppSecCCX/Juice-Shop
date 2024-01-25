@@ -33,8 +33,8 @@ pipeline {
 
         stage('Semgrep-Scan') {
             steps {
-                sh 'chmod +x /.cache/pip'
-                sh 'chown -R user:Admin /.cache/pip'
+                // sh 'chmod +x /.cache/pip'
+                // sh 'chown -R user:Admin /.cache/pip'
                 // sh 'pip install --user --upgrade pip'
                 sh 'pip install --user semgrep'
                 sh 'pip install --user -r requirements.txt'
