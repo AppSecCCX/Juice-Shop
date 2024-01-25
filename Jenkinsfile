@@ -21,20 +21,20 @@ pipeline {
         //     }
         // }
 
-        stage('Unit test') {
-            steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    // sh "pip install -r requirements.txt --user"
-                    sh 'python3 -m pip install semgrep'
-                }
-            }
+        // stage('Unit test') {
+        //     steps {
+        //         withEnv(["HOME=${env.WORKSPACE}"]) {
+        //             // sh "pip install -r requirements.txt --user"
+        //             sh 'python3 -m pip install semgrep'
+        //         }
+        //     }
 
-            post {
-                cleanup {
-                    cleanWs()
-                }
-            }
-        }
+        //     post {
+        //         cleanup {
+        //             cleanWs()
+        //         }
+        //     }
+        // }
 
         stage('Semgrep-Scan') {
             steps {
@@ -43,8 +43,14 @@ pipeline {
                 // sh 'pip install --user --upgrade pip'
                 
                 // sh 'pip install --user -r requirements.txt'
-                sh 'semgrep ci'
-                sh 'semgrep --config=auto'
+                // sh 'semgrep ci'
+                // sh 'semgrep --config=auto'
+
+                sh '''docker pull returntocorp/semgrep && \
+                docker run \
+                -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
+                -v "$(pwd):$(pwd)" --workdir $(pwd) \
+                returntocorp/semgrep semgrep ci '''
             }
         }
     
