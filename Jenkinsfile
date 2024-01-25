@@ -20,6 +20,7 @@ pipeline {
         //          sh 'npm install'
         //     }
         // }
+        
 
         stage('Semgrep-Scan') {
             steps {
