@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    //  agent {
-    //     docker { image 'python:3' }
-    // }
-
     // tools {nodejs "node"}
     environment {
       SEMGREP_APP_TOKEN = credentials('semgrep-scan')
@@ -21,31 +17,8 @@ pipeline {
         //     }
         // }
 
-        // stage('Unit test') {
-        //     steps {
-        //         withEnv(["HOME=${env.WORKSPACE}"]) {
-        //             // sh "pip install -r requirements.txt --user"
-        //             sh 'python3 -m pip install semgrep'
-        //         }
-        //     }
-
-        //     post {
-        //         cleanup {
-        //             cleanWs()
-        //         }
-        //     }
-        // }
-
         stage('Semgrep-Scan') {
             steps {
-                // sh 'chmod +x /.cache/pip'
-                // sh 'chown -R user:Admin /.cache/pip'
-                // sh 'pip install --user --upgrade pip'
-                
-                // sh 'pip install --user -r requirements.txt'
-                // sh 'semgrep ci'
-                // sh 'semgrep --config=auto'
-
                 sh '''docker pull returntocorp/semgrep && \
                 docker run \
                 -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
@@ -56,7 +29,7 @@ pipeline {
     
         stage('Snyk') {
             steps {
-                echo 'Snyk...'
+                echo 'Snyk Scanning...'
                 snykSecurity(
                 snykInstallation: 'Snyk-Scan',
                 snykTokenId: 'Snyk-Scan',
