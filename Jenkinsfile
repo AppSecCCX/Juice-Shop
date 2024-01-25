@@ -24,7 +24,7 @@ pipeline {
 
         stage('Semgrep-Scan') {
             steps {
-                sh 'chmod x+ /.cache/pip'
+                sh 'chmod +x /.cache/pip'
                 sh 'pip3 install semgrep'
                 sh 'pip install --user -r requirements.txt'
                 sh 'semgrep ci'
