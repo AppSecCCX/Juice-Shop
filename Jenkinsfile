@@ -1,21 +1,21 @@
 pipeline {
     agent any
 
-    // tools {nodejs "node"}
+    tools {nodejs "node"}
     environment {
       SEMGREP_APP_TOKEN = credentials('semgrep-scan')
     }
 
     stages {
-        // stage ('install deps') {
-        //     steps {
-        //         // nodejs('install nodejs') {
-        //         // sh 'npm install'
-        //         // }
+        stage ('install deps') {
+            steps {
+                // nodejs('install nodejs') {
+                // sh 'npm install'
+                // }
 
-        //          sh 'npm install'
-        //     }
-        // }
+                 sh 'npm install'
+            }
+        }
 
         stage('Semgrep-Scan') {
             steps {
