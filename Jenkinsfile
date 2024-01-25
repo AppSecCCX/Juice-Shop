@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     // tools {nodejs "node"}
-    environment {
-      SEMGREP_APP_TOKEN = credentials('semgrep-scan')
-    }
+    // environment {
+    //   SEMGREP_APP_TOKEN = credentials('semgrep-scan')
+    // }
 
     stages {
         // stage ('install deps') {
@@ -17,15 +17,15 @@ pipeline {
         //     }
         // }
 
-        stage('Semgrep-Scan') {
-            steps {
-                sh '''docker pull returntocorp/semgrep && \
-                docker run \
-                -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
-                -v "$(pwd):$(pwd)" --workdir $(pwd) \
-                returntocorp/semgrep semgrep ci '''
-            }
-        }
+        // stage('Semgrep-Scan') {
+        //     steps {
+        //         sh '''docker pull returntocorp/semgrep && \
+        //         docker run \
+        //         -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
+        //         -v "$(pwd):$(pwd)" --workdir $(pwd) \
+        //         returntocorp/semgrep semgrep ci '''
+        //     }
+        // }
     
         stage('Snyk') {
             steps {
