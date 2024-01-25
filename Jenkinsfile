@@ -23,6 +23,8 @@ pipeline {
 
         stage('Semgrep-Scan') {
             steps {
+                sh 'apt-get update'
+                sh 'apt-get install sudo'
                 sh 'sudo -H pip3 install semgrep'
                 sh 'pip install --user -r requirements.txt'
                 sh 'semgrep ci'
