@@ -4,7 +4,7 @@ pipeline {
     agent {
         docker { image 'python:3' }
     }
-
+    
     // tools {nodejs "node"}
     environment {
       SEMGREP_APP_TOKEN = credentials('semgrep-scan')
