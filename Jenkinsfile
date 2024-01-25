@@ -1,11 +1,8 @@
 pipeline {
     // agent any
 
-    agent {
-       docker {
-            label "docker" 
-            image "python:3.7"
-        }
+     agent {
+        docker { image 'python:3' }
     }
 
     // tools {nodejs "node"}
@@ -36,7 +33,7 @@ pipeline {
                 cleanup {
                     cleanWs()
                 }
-                }
+            }
         }
 
         stage('Semgrep-Scan') {
