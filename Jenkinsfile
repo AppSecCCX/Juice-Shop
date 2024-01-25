@@ -33,16 +33,13 @@ pipeline {
 
         stage('Semgrep-Scan') {
             steps {
-                sh '''docker pull returntocorp/semgrep && \
-            docker run \
-            -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
-            -e SEMGREP_REPO_URL=$SEMGREP_REPO_URL \
-            -e SEMGREP_REPO_NAME=$SEMGREP_REPO_NAME \
-            -e SEMGREP_BRANCH=$SEMGREP_BRANCH \
-            -e SEMGREP_COMMIT=$SEMGREP_COMMIT \
-            -e SEMGREP_PR_ID=$SEMGREP_PR_ID \
-            -v "$(pwd):$(pwd)" --workdir $(pwd) \
-            returntocorp/semgrep semgrep ci '''
+                // sh 'chmod +x /.cache/pip'
+                // sh 'chown -R user:Admin /.cache/pip'
+                // sh 'pip install --user --upgrade pip'
+                sh 'pip install --user semgrep'
+                // sh 'pip install --user -r requirements.txt'
+                // sh 'semgrep ci'
+                sh 'semgrep --config=auto'
             }
         }
     
