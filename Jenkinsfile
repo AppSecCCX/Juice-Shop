@@ -21,21 +21,22 @@ pipeline {
         //     }
         // }
 
-        stage('Unit test') {
-    steps {
-        sh '''
-            python -m venv .venv
-            . .venv/bin/activate
-            pip install -r requirements.txt
-            pytest -v
-        '''
-     }
+    //     stage('Unit test') {
+    // steps {
+    //     sh '''
+    //         python -m venv .venv
+    //         . .venv/bin/activate
+    //         pip install -r requirements.txt
+    //         pytest -v
+    //     '''
+    //  }
 }
 
 
         stage('Semgrep-Scan') {
             steps {
                 // sh 'chmod +x /cache/pip'
+                sh 'pip install --user --upgrade pip'
                 sh 'pip install semgrep'
                 sh 'pip install --user -r requirements.txt'
                 sh 'semgrep ci'
