@@ -24,7 +24,7 @@ pipeline {
         stage('Unit test') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh "pip install -r requirements.txt --user"
+                    // sh "pip install -r requirements.txt --user"
                     sh 'pip install --user semgrep'
                 }
             }
