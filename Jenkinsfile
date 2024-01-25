@@ -43,7 +43,7 @@ pipeline {
                 // sh 'pip install --user --upgrade pip'
                 
                 // sh 'pip install --user -r requirements.txt'
-                // sh 'semgrep ci'
+                sh 'semgrep ci'
                 sh 'semgrep --config=auto'
             }
         }
