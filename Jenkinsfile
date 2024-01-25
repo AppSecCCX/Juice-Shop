@@ -3,9 +3,9 @@ pipeline {
 
     agent {
        docker {
-      label "docker && linux" 
-      image "python:3.7"
-    }
+            label "docker" 
+            image "python:3.7"
+        }
     }
 
     // tools {nodejs "node"}
