@@ -21,15 +21,15 @@ pipeline {
         //     }
         // }
 
-    //     stage('Unit test') {
-    // steps {
-    //     sh '''
-    //         python -m venv .venv
-    //         . .venv/bin/activate
-    //         pip install -r requirements.txt
-    //         pytest -v
-    //     '''
-    //  }
+        stage('Unit test') {
+    steps {
+        sh '''
+            python -m venv .venv
+            . .venv/bin/activate
+            pip install -r requirements.txt
+            pytest -v
+        '''
+     }
 
         stage('Semgrep-Scan') {
             steps {
