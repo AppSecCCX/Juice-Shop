@@ -35,9 +35,29 @@ pipeline {
             }
         }
 
-
+        stage('Semgrep-Scan') {
+            steps {
+                sh '''docker pull returntocorp/semgrep && \
+                docker run \
+                -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
+                -v "$(pwd):$(pwd)" --workdir $(pwd) \
+                returntocorp/semgrep semgrep ci '''
+            }
+        }
     
-
+        stage('Snyk') {
+            steps {
+                echo 'Snyk Scanning...'
+                snykSecurity(
+                snykInstallation: 'Snyk-Scan',
+                snykTokenId: 'Snyk-Scan',
+                // additionalArguments: '--all-projects'
+                // --detection-depth=3
+                )
+                sh 'cd  /var/jenkins_home/workspace/Juiceshop/'
+                sh 'cat *_snyk_report.json'
+            }
+        }
            
         stage('DEV') {
             steps {
@@ -47,21 +67,7 @@ pipeline {
 
         stage('TEST') {
             steps {
-
-                // Snyk
-                echo 'Snyk Scanning...'
-                snykSecurity(
-                    snykInstallation: 'Snyk-Scan',
-                    snykTokenId: 'Snyk-Scan',
-                )
-
-                // Semgep
-                echo 'Semgrep Testing...'
-                sh '''docker pull returntocorp/semgrep && \
-                docker run \
-                -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
-                -v "$(pwd):$(pwd)" --workdir $(pwd) \
-                returntocorp/semgrep semgrep ci '''
+                echo 'Testing..'
             }
         }
         stage('PROD') {
