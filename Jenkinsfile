@@ -33,7 +33,7 @@ pipeline {
                 snykSecurity(
                 snykInstallation: 'Snyk-Scan',
                 snykTokenId: 'Snyk-Scan',
-                additionalArguments: '--all-projects'
+                // additionalArguments: '--all-projects'
                 // --detection-depth=3
                 )
                 sh 'cd  /var/jenkins_home/workspace/Juiceshop/'
