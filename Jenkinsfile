@@ -79,9 +79,9 @@ pipeline {
 
     }
 
-    post {
-        always {
-            junit testResults: 'dastardly-report.html', skipPublishingChecks: true
-        }
-    }
+    // post {
+    //     always {
+    //         junit testResults: 'dastardly-report.html', skipPublishingChecks: true
+    //     }
+    // }
 }
