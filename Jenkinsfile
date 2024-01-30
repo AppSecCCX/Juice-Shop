@@ -54,8 +54,6 @@ pipeline {
                 // additionalArguments: '--all-projects'
                 // --detection-depth=3
                 )
-                sh 'cd  /var/jenkins_home/workspace/Juiceshop/'
-                sh 'cat *_snyk_report.json'
             }
         }
            
