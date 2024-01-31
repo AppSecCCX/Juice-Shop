@@ -52,6 +52,13 @@ pipeline {
                 echo 'Testing..'
                 steps {
                     sh 'docker pull public.ecr.aws/portswigger/dastardly:latest'
+                    cleanWs()
+                    sh '''
+                    docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
+                    -e BURP_START_URL=https://juice-shop.herokuapp.com/ \
+                    -e BURP_REPORT_FILE_PATH=${WORKSPACE}/dastardly-report.xml \
+                    public.ecr.aws/portswigger/dastardly:latest
+                    '''
                 }
             }
         }
@@ -59,13 +66,7 @@ pipeline {
 
          stage ("Docker run Dastardly from Burp Suite Scan") {
             steps {
-                cleanWs()
-                sh '''
-                    docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
-                    -e BURP_START_URL=https://juice-shop.herokuapp.com/ \
-                    -e BURP_REPORT_FILE_PATH=${WORKSPACE}/dastardly-report.html \
-                    public.ecr.aws/portswigger/dastardly:latest
-                '''
+                
             }
         }
 
