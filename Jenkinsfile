@@ -43,7 +43,7 @@ pipeline {
                 // additionalArguments: '--all-projects'
                 // --detection-depth=3
                 )
-                sh 'exit 0'
+                sh 'exit 0' 
             }
         }
            
