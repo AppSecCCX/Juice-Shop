@@ -17,46 +17,42 @@ pipeline {
             }
         }
 
-         
-
-        // stage('Semgrep-Scan') {
-        //     steps {
-                
-        //     }
-        // }
-    
-        // stage('Snyk') {
-        //     steps {
-                
-        //     }
-        // }
-           
         stage('DEV') {
             steps {
                 echo 'Building...'
             }
         }
 
+        stage('Semgrep-Scan') {
+            steps {
+                sh '''docker pull returntocorp/semgrep && \
+                docker run \
+                -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
+                -v "$(pwd):$(pwd)" --workdir $(pwd) \
+                returntocorp/semgrep semgrep ci '''
+                sh 'exit 0'
+            }
+        }
+    
+        stage('Snyk') {
+            steps {
+                echo 'Snyk Scanning...'
+                snykSecurity(
+                snykInstallation: 'Snyk-Scan',
+                snykTokenId: 'Snyk-Scan',
+                // additionalArguments: '--all-projects'
+                // --detection-depth=3
+                )
+            }
+        }
+           
+        
+
         stage('TEST') {
             steps {
                 echo 'Testing..'
                 steps {
-
-                    sh '''docker pull returntocorp/semgrep && \
-                    docker run \
-                    -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
-                    -v "$(pwd):$(pwd)" --workdir $(pwd) \
-                    returntocorp/semgrep semgrep ci '''
-
-                    echo 'Snyk Scanning...'
-                    snykSecurity(
-                    snykInstallation: 'Snyk-Scan',
-                    snykTokenId: 'Snyk-Scan',
-                    // additionalArguments: '--all-projects'
-                    // --detection-depth=3
-                    )
-
-
+                    
                     sh 'docker pull public.ecr.aws/portswigger/dastardly:latest'
                     cleanWs()
                     sh '''
