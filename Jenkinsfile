@@ -64,11 +64,11 @@ pipeline {
         }
                 
 
-         stage ("Docker run Dastardly from Burp Suite Scan") {
-            steps {
+        //  stage ("Docker run Dastardly from Burp Suite Scan") {
+        //     steps {
                 
-            }
-        }
+        //     }
+        // }
 
 
 
