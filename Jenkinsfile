@@ -9,10 +9,6 @@ pipeline {
     stages {
         stage ('install deps') {
             steps {
-                // nodejs('install nodejs') {
-                // sh 'npm install'
-                // }
-
                  sh 'npm install'
             }
         }
@@ -58,21 +54,13 @@ pipeline {
                     cleanWs()
                     sh '''
                     docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
-                    -e BURP_START_URL=https://juice-shop.herokuapp.com/ \
+                    -e BURP_START_URL=http://localhost:3000/ \
                     -e BURP_REPORT_FILE_PATH=${WORKSPACE}/dastardly-report.xml \
                     public.ecr.aws/portswigger/dastardly:latest
                     '''
                 }
             }
         }
-                
-
-        //  stage ("Docker run Dastardly from Burp Suite Scan") {
-        //     steps {
-                
-        //     }
-        // }
-
 
 
         stage('PROD') {
