@@ -42,8 +42,8 @@ pipeline {
                 snykTokenId: 'Snyk-Scan',
                 additionalArguments: '--severity-threshold=critical'
                 // --detection-depth=3
-                )
                 sh 'exit 0' 
+                )
             }
         }
            
