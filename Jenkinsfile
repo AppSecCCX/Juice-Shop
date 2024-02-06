@@ -4,8 +4,8 @@ pipeline {
     tools {nodejs "node"}
     environment {
       SEMGREP_APP_TOKEN = credentials('semgrep-scan')
-      DOJO_HOST = 'http://localhost:9000'
-      DOJO_API_TOKEN = 'd56d4b30c4b8e877dc0a53fcd46994973f547e68'
+    //   DOJO_HOST = 'http://localhost:9000'
+    //   DOJO_API_TOKEN = 'd56d4b30c4b8e877dc0a53fcd46994973f547e68'
     }
 
     stages {
