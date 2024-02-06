@@ -34,7 +34,7 @@ pipeline {
                 snykSecurity(
                 snykInstallation: 'Snyk-Scan',
                 snykTokenId: 'Snyk-Scan',
-                additionalArguments: '--detection-depth=3 --all-projects'
+                // additionalArguments: '--detection-depth=3 --all-projects'
                 // 
                 )
                 sh 'exit 0' 
