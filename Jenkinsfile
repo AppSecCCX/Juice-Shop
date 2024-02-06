@@ -57,7 +57,7 @@ pipeline {
                     public.ecr.aws/portswigger/dastardly:latest
                     '''
                 }
-                echo 'Dastardly Scanning Completed.'
+                // echo 'Dastardly Scanning Completed.'
                 // echo 'Upload Dastardly Scan to DefectDojo'
                 // steps {
                 //     sh '''
