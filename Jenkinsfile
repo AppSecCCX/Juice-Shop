@@ -58,8 +58,8 @@ pipeline {
                     -e BURP_START_URL=https://juice-shop.herokuapp.com \
                     -e BURP_REPORT_FILE_PATH=${WORKSPACE}/dastardly-report.xml \
                     public.ecr.aws/portswigger/dastardly:latest \
-                    exit 0
                     '''
+                    sh 'exit 0'
                 
                 // echo 'Dastardly Scanning Completed.'
                 // echo 'Upload Dastardly Scan to DefectDojo'
