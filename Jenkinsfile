@@ -71,13 +71,14 @@ pipeline {
                 //     '''
                 // }
             }
-        }
-
-        post {
+            post {
             always {
                 junit testResults: 'dastardly-report.html', skipPublishingChecks: true
             }
-    }
+        }
+        }
+
+        
 
 
         stage('PROD') {
