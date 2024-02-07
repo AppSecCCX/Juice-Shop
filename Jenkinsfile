@@ -42,14 +42,17 @@ pipeline {
         //     }
         // }
            
+        stage ("Docker Pull Dastardly from Burp Suite container image") {
+            steps {
+                sh 'docker pull public.ecr.aws/portswigger/dastardly:latest'
+            }
+        }
         
 
         stage('Dastadrly Scan...') {
             steps {
                 echo 'Dastardly Scanning..'
                 steps {
-                    
-                    sh 'docker pull public.ecr.aws/portswigger/dastardly:latest'
                     cleanWs()
                     sh '''
                     docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
@@ -70,6 +73,12 @@ pipeline {
             }
         }
 
+        post {
+            always {
+                junit testResults: 'dastardly-report.html', skipPublishingChecks: true
+            }
+    }
+
 
         stage('PROD') {
             steps {
@@ -79,9 +88,5 @@ pipeline {
 
     }
 
-    // post {
-    //     always {
-    //         junit testResults: 'dastardly-report.html', skipPublishingChecks: true
-    //     }
-    // }
+    
 }
