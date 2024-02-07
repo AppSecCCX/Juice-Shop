@@ -35,7 +35,8 @@ pipeline {
                 snykInstallation: 'Snyk-Scan',
                 snykTokenId: 'Snyk-Scan',
                 severity: 'low',
-                additionalArguments: '--failOnIssues=false',
+                failOnIssues: 'false'
+                // additionalArguments: '--failOnIssues=false',
                 )
                 sh 'exit 0' 
             }
