@@ -17,30 +17,29 @@ pipeline {
             }
         }
 
-        // stage('Semgrep-Scan') {
-        //     steps {
-        //         sh '''docker pull returntocorp/semgrep && \
-        //         docker run \
-        //         -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
-        //         -v "$(pwd):$(pwd)" --workdir $(pwd) \
-        //         returntocorp/semgrep semgrep ci '''
-        //         sh 'exit 0'
-        //     }
-        // }
+        stage('Semgrep-Scan') {
+            steps {
+                sh '''docker pull returntocorp/semgrep && \
+                docker run \
+                -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
+                -v "$(pwd):$(pwd)" --workdir $(pwd) \
+                returntocorp/semgrep semgrep ci '''
+                sh 'exit 0'
+            }
+        }
     
-        // stage('Snyk') {
-        //     steps {
-        //         echo 'Snyk Scanning...'
-        //         snykSecurity(
-        //         snykInstallation: 'Snyk-Scan',
-        //         snykTokenId: 'Snyk-Scan',
-        //         severity: 'low',
-        //         failOnIssues: 'false'
-        //         // additionalArguments: '--failOnIssues=false',
-        //         )
-        //         sh 'exit 0' 
-        //     }
-        // }
+        stage('Snyk') {
+            steps {
+                echo 'Snyk Scanning...'
+                snykSecurity(
+                    snykInstallation: 'Snyk-Scan',
+                    snykTokenId: 'Snyk-Scan',
+                    severity: 'low',
+                    failOnIssues: 'false'
+                )
+                sh 'exit 0' 
+            }
+        }
            
            stage ("Docker Pull Dastardly from Burp Suite container image") {
             steps {
