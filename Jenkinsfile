@@ -52,7 +52,7 @@ pipeline {
         stage('Dastadrly Scan...') {
             steps {
                 echo 'Dastardly Scanning..'
-                steps {
+                
                     cleanWs()
                     sh '''
                     docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
@@ -60,7 +60,7 @@ pipeline {
                     -e BURP_REPORT_FILE_PATH=${WORKSPACE}/dastardly-report.xml \
                     public.ecr.aws/portswigger/dastardly:latest
                     '''
-                }
+                
                 // echo 'Dastardly Scanning Completed.'
                 // echo 'Upload Dastardly Scan to DefectDojo'
                 // steps {
