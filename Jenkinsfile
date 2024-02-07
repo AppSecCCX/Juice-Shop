@@ -36,7 +36,6 @@ pipeline {
                 snykInstallation: 'Snyk-Scan',
                 snykTokenId: 'Snyk-Scan',
                 additionalArguments: '--detection-depth=3 --all-projects'
-                // 
                 )
                 sh 'exit 0' 
             }
@@ -53,7 +52,7 @@ pipeline {
                     cleanWs()
                     sh '''
                     docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
-                    -e BURP_START_URL=https://juice-shop.herokuapp.com/ \
+                    -e BURP_START_URL=https://juice-shop.herokuapp.com \
                     -e BURP_REPORT_FILE_PATH=${WORKSPACE}/dastardly-report.xml \
                     public.ecr.aws/portswigger/dastardly:latest
                     '''
