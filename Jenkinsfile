@@ -55,9 +55,9 @@ pipeline {
                 steps {
                     cleanWs()
                     sh '''
-                    docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
+                    docker run --user $(id -u) -v /var/jenkins_home/workspace/:/var/jenkins_home/workspace/:rw \
                     -e BURP_START_URL=https://juice-shop.herokuapp.com \
-                    
+                    -e BURP_REPORT_FILE_PATH=/var/jenkins_home/workspace/dastardly-report.xml \
                     public.ecr.aws/portswigger/dastardly:latest
                     '''
                 }
