@@ -42,41 +42,28 @@ pipeline {
         //     }
         // }
            
-        stage ("Docker Pull Dastardly from Burp Suite container image") {
+            stage ("Docker Pull Dastardly from Burp Suite container image") {
             steps {
                 sh 'docker pull public.ecr.aws/portswigger/dastardly:latest'
             }
         }
-        
-
-        stage('Dastadrly Scan...') {
+        stage ("Docker run Dastardly from Burp Suite Scan") {
             steps {
-                echo 'Dastardly Scanning..'
-                steps {
-                    cleanWs()
-                    sh '''
+                cleanWs()
+                sh '''
                     docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
-                    -e BURP_START_URL=https://juice-shop.herokuapp.com \
+                    -e BURP_START_URL=https://ginandjuice.shop/ \
                     -e BURP_REPORT_FILE_PATH=${WORKSPACE}/dastardly-report.xml \
                     public.ecr.aws/portswigger/dastardly:latest
-                    '''
-                }
-                // echo 'Dastardly Scanning Completed.'
-                // echo 'Upload Dastardly Scan to DefectDojo'
-                // steps {
-                //     sh '''
-                //     upload-results.py --host $DOJO_HOST --api_key $DOJO_API_TOKEN \
-                //     --engagement_id 1 --product_id 1 --lead_id 1 --environment "Production" \
-                //     --result_file dastardly-report.xml --scanner "Snyk Scan"
-                //     '''
-                // }
-            }
-            post {
-            always {
-                junit testResults: 'dastardly-report.html', skipPublishingChecks: true
+                '''
             }
         }
+    }
+    post {
+        always {
+            junit testResults: 'dastardly-report.xml', skipPublishingChecks: true
         }
+    }
 
         
 
