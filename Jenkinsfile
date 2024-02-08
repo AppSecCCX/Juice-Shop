@@ -13,7 +13,7 @@ pipeline {
         stage('DEV') {
             steps {
                 echo 'Building...'
-                sh 'npm install'
+                // sh 'npm install'
             }
         }
 
@@ -45,18 +45,12 @@ pipeline {
                 sh 'exit 0' 
             }
         }
-           
-           stage ("Docker Pull Dastardly from Burp Suite container image") {
-            steps {
-                sh 'docker pull public.ecr.aws/portswigger/dastardly:latest'
-            }
-        }
         
 
         stage('Dastadrly Scan...') {
             steps {
                 echo 'Dastardly Scanning..'
-                
+                    sh 'docker pull public.ecr.aws/portswigger/dastardly:latest'
                     cleanWs()
                     sh '''
                     docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
