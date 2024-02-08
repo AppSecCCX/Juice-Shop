@@ -26,6 +26,12 @@ pipeline {
                 returntocorp/semgrep semgrep ci '''
                 sh 'exit 0'
             }
+            post {
+                always {
+                    junit allowEmptyResults: true, testResults: 'semgrep-report.xml', skipPublishingChecks: true
+                }
+            }
+        }
         }
     
         stage('Snyk') {
