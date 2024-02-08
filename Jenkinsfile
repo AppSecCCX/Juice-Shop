@@ -23,7 +23,8 @@ pipeline {
                 docker run \
                 -e SEMGREP_APP_TOKEN=$SEMGREP_APP_TOKEN \
                 -v "$(pwd):$(pwd)" --workdir $(pwd) \
-                returntocorp/semgrep semgrep ci '''
+                returntocorp/semgrep semgrep ci \
+                -e SEMGREP_REPORT_FILE_PATH=${WORKSPACE}/semgrep-report.xml '''
                 sh 'exit 0'
             }
             post {
