@@ -32,7 +32,7 @@ pipeline {
                 }
             }
         }
-        }
+        
     
         stage('Snyk') {
             steps {
