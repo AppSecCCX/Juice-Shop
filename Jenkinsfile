@@ -13,7 +13,7 @@ pipeline {
         stage('DEV') {
             steps {
                 echo 'Building...'
-                // sh 'npm install'
+                sh 'npm install --no-audit'
             }
         }
 
@@ -76,9 +76,6 @@ pipeline {
                 }
             }
         }
-
-        
-
 
         stage('PROD') {
             steps {
