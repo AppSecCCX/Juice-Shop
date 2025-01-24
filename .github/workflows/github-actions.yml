@@ -10,7 +10,7 @@ jobs:
       with:
         node-version: 20
         cache: 'npm'
-    - run: npm i
+    - run: npm install
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
