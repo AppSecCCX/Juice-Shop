@@ -30,7 +30,7 @@ jobs:
 
   secret_scanning:
     runs-on: ubuntu-20.04
-    needs: test
+    needs: oast-snyk
     steps:
       - uses: actions/checkout@v2
 
