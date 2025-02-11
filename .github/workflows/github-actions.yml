@@ -56,7 +56,6 @@ jobs:
   
   dast-zap_baseline:
     runs-on: ubuntu-20.04
-    needs: test
     steps:
       - run: |
            docker pull softwaresecurityproject/zap-stable:2.14.0
@@ -71,7 +70,6 @@ jobs:
 
   dast-nuclei-scan:
     runs-on: ubuntu-20.04
-    needs: test
     steps:
       - run: |
            docker run --user $(id -u):$(id -g) -w /nuclei -v $(pwd):/nuclei:rw --rm projectdiscovery/nuclei:v2.9.6 -u https://prod-m4usx33m.lab.practical-devsecops.training -j -o nuclei-output.json
