@@ -3,7 +3,7 @@ name: Django                                  # workflow name
 on:
   push:
     branches:                                 
-      - master
+      - main
 
 jobs:
   build:
