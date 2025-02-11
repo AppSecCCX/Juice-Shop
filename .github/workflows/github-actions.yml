@@ -11,6 +11,7 @@ jobs:
         node-version: 20
         cache: 'npm'
     - run: npm install
+
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
@@ -28,7 +29,6 @@ jobs:
   
   oast-snyk:
     runs-on: ubuntu-20.04
-    // needs: test
     steps:
       - uses: actions/checkout@master
       - uses: snyk/actions/setup@master
