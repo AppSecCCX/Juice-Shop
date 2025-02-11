@@ -28,17 +28,28 @@ jobs:
           path: security_results/snyk-results.json
         if: always()
 
-  secret_scanning:
+  secret_scanning-trufflehog:
     runs-on: ubuntu-20.04
-    needs: oast-snyk
     steps:
       - uses: actions/checkout@v2
 
       - run: docker run --rm -v $(pwd):/src hysnsec/trufflehog filesystem /src --json > trufflehog-output.json
-        continue-on-error: true             # allow the build to fail, similar to "allow_failure: true" in GitLab
+        continue-on-error: true            
 
       - uses: actions/upload-artifact@v4
         with:
           name: TruffleHog
           path: trufflehog-output.json
-        if: always()                        # what is this for?
+        if: always()
+  
+  semgrep:
+    name: semgrep/ci
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep --config auto --output semgrep-output.json --json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semgrep
+          path: semgrep-output.json
+        if: always()                
