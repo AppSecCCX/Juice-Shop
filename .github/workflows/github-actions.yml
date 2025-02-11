@@ -10,6 +10,7 @@ jobs:
       with:
         node-version: 20
         cache: 'npm'
+    - run: npm upgrade
     - run: npm install
 
   Explore-GitHub-Actions:
