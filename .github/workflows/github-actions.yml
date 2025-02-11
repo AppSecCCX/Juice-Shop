@@ -31,10 +31,8 @@ jobs:
         with:
           node-version: '10.x'
 
-
-
       - name: Run Snyk
-        run: snyk test --json > security_results/snyk-results.json
+        run: snyk test --json > snyk-results.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         continue-on-error: true             # allow the build to fail, similar to allow_failure: true
