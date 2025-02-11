@@ -1,5 +1,5 @@
 # App
-node_modules/
+# node_modules/
 juiceshop.sqlite
 order_*.pdf
 app/
