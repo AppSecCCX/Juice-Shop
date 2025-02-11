@@ -28,7 +28,7 @@ jobs:
   
   oast-snyk:
     runs-on: ubuntu-20.04
-    needs: test
+    // needs: test
     steps:
       - uses: actions/checkout@master
       - uses: snyk/actions/setup@master
