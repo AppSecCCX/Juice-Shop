@@ -31,8 +31,7 @@ jobs:
         with:
           node-version: '10.x'
 
-      - name: Install Node modules
-        run: npm install
+
 
       - name: Run Snyk
         run: snyk test --json > snyk-results.json
