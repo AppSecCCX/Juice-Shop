@@ -57,28 +57,4 @@ jobs:
           path: semgrep-output.json
         if: always()
   
-  dast-zap_baseline:
-    runs-on: ubuntu-20.04
-    steps:
-      - run: |
-           docker pull softwaresecurityproject/zap-stable:2.14.0
-           docker run --user root --rm -v $(pwd):/zap/wrk:rw -w /zap softwaresecurityproject/zap-stable:2.14.0 zap-baseline.py -t ${{ secrets.PROD_URL }} -J zap-output.json
-        continue-on-error: true
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ZAP Scan
-          path: zap-output.json
-        if: always()
-
-  dast-nuclei-scan:
-    runs-on: ubuntu-20.04
-    steps:
-      - run: |
-           docker run --user $(id -u):$(id -g) -w /nuclei -v $(pwd):/nuclei:rw --rm projectdiscovery/nuclei:v2.9.6 -u https://prod-m4usx33m.lab.practical-devsecops.training -j -o nuclei-output.json
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: nuclei scan
-          path: nuclei-output.json
-        if: always()
+ 
