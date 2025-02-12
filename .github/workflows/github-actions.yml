@@ -68,7 +68,7 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
         with:
-          project: 'webgoat'
+          project: 'juiceshop'
           path: '.'
           format: 'JSON'
 
