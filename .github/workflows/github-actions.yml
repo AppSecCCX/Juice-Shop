@@ -64,6 +64,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Build with NPM
+        run: npm install
+
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
@@ -73,8 +76,8 @@ jobs:
           format: 'JSON'
 
       - name: Upload Test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@master
         with:
            name: Depcheck report
-           path: depcheck-output.json
+           path: ${{github.workspace}}/reports
 
