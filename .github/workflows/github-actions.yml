@@ -56,25 +56,3 @@ jobs:
           name: semgrep
           path: semgrep-output.json
         if: always()
-
-  sca-odc-backend:
-    runs-on: ubuntu-latest
-    name: depecheck_test
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Depcheck
-        uses: dependency-check/Dependency-Check_Action@1.0.0
-        id: Depcheck
-        with:
-          project: 'Juice-Shop'
-          path: '.'
-          format: 'JSON'
-
-      - name: Upload Test results
-        uses: actions/upload-artifact@master
-        with:
-           name: Depcheck report
-           path: ${{github.workspace}}/reports
-
