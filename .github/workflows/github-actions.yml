@@ -2,9 +2,10 @@ name: Dev Security Actions
 on: 
   push:
     branches:
-      - dev
-  
+      - Dev
+
 jobs:
+  
   oast-snyk:
     runs-on: ubuntu-20.04
     steps:
@@ -28,6 +29,20 @@ jobs:
         with:
           name: Snyk
           path: security_results/snyk-results.json
+        if: always()
+
+  secret_scanning-trufflehog:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: docker run --rm -v $(pwd):/src hysnsec/trufflehog filesystem /src --json > trufflehog-output.json
+        continue-on-error: true            
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TruffleHog
+          path: trufflehog-output.json
         if: always()
   
   sast-semgrep:
