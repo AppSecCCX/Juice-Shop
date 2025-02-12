@@ -2,7 +2,7 @@ name: Dev Security Actions
 on: 
   push:
     branches:
-      - Dev
+      - dev
 
 jobs:
   
@@ -78,4 +78,3 @@ jobs:
            name: Depcheck report
            path: ${{github.workspace}}/reports
 
-           
