@@ -64,9 +64,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build with NPM
-        run: npm install
-
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
