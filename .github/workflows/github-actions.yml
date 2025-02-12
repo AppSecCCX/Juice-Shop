@@ -4,6 +4,7 @@ on:
     branches:
       - dev
   
+jobs:
   oast-snyk:
     runs-on: ubuntu-20.04
     steps:
@@ -40,7 +41,6 @@ on:
           name: semgrep
           path: semgrep-output.json
         if: always()
-
 
   odc-backend:
     runs-on: ubuntu-20.04
