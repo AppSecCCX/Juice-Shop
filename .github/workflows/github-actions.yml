@@ -28,6 +28,19 @@ on:
           name: Snyk
           path: security_results/snyk-results.json
         if: always()
+  
+  sast-semgrep:
+    name: semgrep/ci
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep --config auto --output semgrep-output.json --json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semgrep
+          path: semgrep-output.json
+        if: always()
+
 
   odc-backend:
     runs-on: ubuntu-20.04
@@ -49,15 +62,3 @@ on:
         with:
            name: Depcheck report
            path: ${{github.workspace}}/reports
-  
-  sast-semgrep:
-    name: semgrep/ci
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v4
-      - run: docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep --config auto --output semgrep-output.json --json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: semgrep
-          path: semgrep-output.json
-        if: always()
