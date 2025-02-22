@@ -86,4 +86,4 @@ jobs:
           token: ${{ secrets.TOKEN }}
           docker_name: 'softwaresecurityproject/zap-stable:2.14.0'
           target: ${{ secrets.PROD_URL }}
-        continue-on-error: true
+        continue-on-error: false
