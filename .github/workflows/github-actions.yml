@@ -7,14 +7,14 @@ on:
 jobs:
   oast-snyk:
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@master
-        - name: Run Snyk to check for vulnerabilities
-          uses: snyk/actions/node@master
-          env:
-            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          with:
-            args: --severity-threshold=high
+    steps:
+    - uses: actions/checkout@master
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        args: --severity-threshold=high
     # runs-on: ubuntu-latest
     # steps:
     # - uses: actions/checkout@master
@@ -32,7 +32,7 @@ jobs:
     #     name: Snyk
     #     path: security_results/snyk-results.json
     #     args: --severity-threshold=high
-      # if: always()
+    # if: always()
 
   secret_scanning-trufflehog:
     runs-on: ubuntu-latest
