@@ -23,7 +23,7 @@ jobs:
         name: Snyk
         path: security_results/snyk-results.json
         args: --severity-threshold=high
-      if: always()
+      # if: always()
 
   secret_scanning-trufflehog:
     runs-on: ubuntu-latest
