@@ -17,6 +17,7 @@ jobs:
 
   oast-snyk:
     runs-on: ubuntu-latest
+    needs: npm-install
     steps:
     - uses: actions/checkout@master
     - name: Run Snyk to check for vulnerabilities
