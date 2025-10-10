@@ -17,7 +17,7 @@ jobs:
           node-version: '10.x'
 
       - name: Run Snyk
-        run: snyk test
+        run: snyk test --json > snyk-results.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         continue-on-error: true
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Snyk
-          path: security_results/snyk-results.json
+          path: snyk-results.json
         if: always()
 
   # secret_scanning-trufflehog:
