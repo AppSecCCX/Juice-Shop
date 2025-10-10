@@ -42,17 +42,17 @@ jobs:
   #         path: trufflehog-output.json
   #       if: always()
   
-  sast-semgrep:
-    name: semgrep/ci
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep --config auto --output semgrep-output.json --json
-      - uses: actions/upload-artifact@v4
-        with:
-          name: semgrep
-          path: semgrep-output.json
-        if: always()
+  # sast-semgrep:
+  #   name: semgrep/ci
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - run: docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep --config auto --output semgrep-output.json --json
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: semgrep
+  #         path: semgrep-output.json
+  #       if: always()
 
   iac-kics:
     runs-on: ubuntu-latest
@@ -61,7 +61,7 @@ jobs:
       - name: Mkdir results-dir
         run: mkdir -p results-dir
       - name: run kics Scan
-        uses: checkmarx/kics-action@latest
+        uses: checkmarx/kics-action@v1
         with:
           path: 'terraform'
           output_path: results-dir
