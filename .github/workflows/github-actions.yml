@@ -59,7 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Mkdir results-dir
-        run: mkdir -p results-dir
+        run: mkdir results-dir
       - name: run kics Scan
         uses: checkmarx/kics-action@v1
         with:
