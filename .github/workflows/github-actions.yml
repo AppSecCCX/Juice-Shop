@@ -63,7 +63,7 @@ jobs:
       - name: run kics Scan
         uses: checkmarx/kics-action@v1
         with:
-          path: '/'
+          path: 'terraform'
           output_path: results-dir
       - name: display kics results
         run: |
