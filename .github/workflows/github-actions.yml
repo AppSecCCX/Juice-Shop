@@ -65,10 +65,10 @@ jobs:
     - name: Run KICS scan
       uses: checkmarx/kics-action@v1
       with:
-        path: 'docker'
+        path: 'Dockerfile'
         output_path: 'results-dir'
         output_name: 'results.json'
-        platform_type: 'docker'  # optional but helps KICS detect IaC type
+        platform_type: 'Dockerfile'  # optional but helps KICS detect IaC type
         fail_on: 'high'             # optional: fail if high findings
 
     - name: Display KICS results
