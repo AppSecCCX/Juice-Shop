@@ -57,17 +57,35 @@ jobs:
   iac-kics:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: mkdir results-dir
-        run: mkdir -p results-dir
-      - name: run kics Scan
-        uses: checkmarx/kics-action@v1
-        with:
-          path: 'terraform'
-          output_path: results-dir
-      - name: display kics results
-        run: |
-          cat results-dir/results.json  
+    - uses: actions/checkout@v4
+
+    - name: Create results directory
+      run: mkdir -p results-dir
+
+    - name: Run KICS scan
+      uses: checkmarx/kics-action@v1
+      with:
+        path: 'terraform'
+        output_path: 'results-dir'
+        output_name: 'results.json'
+        platform_type: 'terraform'  # optional but helps KICS detect IaC type
+        fail_on: 'high'             # optional: fail if high findings
+
+    - name: Display KICS results
+      if: always()
+      run: cat results-dir/results.json || echo "No KICS results file found"
+    # steps:
+    #   - uses: actions/checkout@v4
+    #   - name: mkdir results-dir
+    #     run: mkdir -p results-dir
+    #   - name: run kics Scan
+    #     uses: checkmarx/kics-action@v1
+    #     with:
+    #       path: 'terraform'
+    #       output_path: results-dir
+    #   - name: display kics results
+    #     run: |
+    #       cat results-dir/results.json  
 
   
   # dast-zap_baseline:
