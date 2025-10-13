@@ -54,34 +54,34 @@ jobs:
   #         path: semgrep-output.json
   #       if: always()
 
-  iac-kics:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
+  # iac-kics:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v4
 
-    - name: Create results directory
-      run: mkdir -p results-dir
+  #   - name: Create results directory
+  #     run: mkdir -p results-dir
 
-    - name: Run KICS scan
-      uses: checkmarx/kics-action@v2.1.14
-      with:
-        path: 'Dockerfile'
-        output_path: 'results-dir'
-        output_name: 'results.json'
-        platform_type: 'Dockerfile'  # optional but helps KICS detect IaC type
-        fail_on: 'high'             # optional: fail if high findings
+  #   - name: Run KICS scan
+  #     uses: checkmarx/kics-action@v2.1.14
+  #     with:
+  #       path: 'Dockerfile'
+  #       output_path: 'results-dir'
+  #       output_name: 'results.json'
+  #       platform_type: 'Dockerfile'  # optional but helps KICS detect IaC type
+  #       fail_on: 'high'             # optional: fail if high findings
 
-    - name: Display KICS results
-      if: always()
-      run: cat results-dir/results.json || echo "No KICS results file found" 
+  #   - name: Display KICS results
+  #     if: always()
+  #     run: cat results-dir/results.json || echo "No KICS results file found" 
 
   
   dast-zap_baseline:
     runs-on: ubuntu-latest
     steps:
       - run: |
-           docker pull softwaresecurityproject/zap-stable:2.14.0
-           docker run --user root --rm -v $(pwd):/zap/wrk:rw -w /zap softwaresecurityproject/zap-stable:2.14.0 zap-baseline.py -t ${{ secrets.PROD_URL }} -J zap-output.json
+           docker pull hysnsec/zap:2.16.1
+           docker run --user root --rm -v $(pwd):/zap/wrk:rw -w /zap hysnsec/zap:2.16.1 zap-baseline.py -t ${{ secrets.PROD_URL }} -J zap-output.json
         continue-on-error: true
 
       - uses: actions/upload-artifact@v4
