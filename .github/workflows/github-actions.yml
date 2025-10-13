@@ -73,34 +73,22 @@ jobs:
 
     - name: Display KICS results
       if: always()
-      run: cat results-dir/results.json || echo "No KICS results file found"
-    # steps:
-    #   - uses: actions/checkout@v4
-    #   - name: mkdir results-dir
-    #     run: mkdir -p results-dir
-    #   - name: run kics Scan
-    #     uses: checkmarx/kics-action@v1
-    #     with:
-    #       path: 'terraform'
-    #       output_path: results-dir
-    #   - name: display kics results
-    #     run: |
-    #       cat results-dir/results.json  
+      run: cat results-dir/results.json || echo "No KICS results file found" 
 
   
-  # dast-zap_baseline:
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - run: |
-  #          docker pull softwaresecurityproject/zap-stable:2.14.0
-  #          docker run --user root --rm -v $(pwd):/zap/wrk:rw -w /zap softwaresecurityproject/zap-stable:2.14.0 zap-baseline.py -t ${{ secrets.PROD_URL }} -J zap-output.json
-  #       continue-on-error: true
+  dast-zap_baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+           docker pull softwaresecurityproject/zap-stable:2.14.0
+           docker run --user root --rm -v $(pwd):/zap/wrk:rw -w /zap softwaresecurityproject/zap-stable:2.14.0 zap-baseline.py -t ${{ secrets.PROD_URL }} -J zap-output.json
+        continue-on-error: true
 
-  #     - uses: actions/upload-artifact@v4
-  #       with:
-  #         name: ZAP Scan
-  #         path: zap-output.json
-  #       if: always()
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ZAP Scan
+          path: zap-output.json
+        if: always()
 
   # dast-nuclei-scan:
   #   runs-on: ubuntu-20.04
