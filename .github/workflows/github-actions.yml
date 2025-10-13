@@ -63,7 +63,7 @@ jobs:
       run: mkdir -p results-dir
 
     - name: Run KICS scan
-      uses: checkmarx/kics-action@v1
+      uses: checkmarx/kics-action@v2.1.14
       with:
         path: 'Dockerfile'
         output_path: 'results-dir'
