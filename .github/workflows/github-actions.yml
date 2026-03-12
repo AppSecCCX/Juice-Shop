@@ -76,19 +76,19 @@ jobs:
   #     run: cat results-dir/results.json || echo "No KICS results file found" 
 
   
-  dast-zap_baseline:
-    runs-on: ubuntu-latest
-    steps:
-      - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.3.0
-        with:
-          target: 'https://juice-shop.herokuapp.com'
+  # dast-zap_baseline:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: ZAP Scan
+  #       uses: zaproxy/action-baseline@v0.3.0
+  #       with:
+  #         target: 'https://juice-shop.herokuapp.com'
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ZAP Scan
-          path: zap-output.json
-        if: always()
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: ZAP Scan
+  #         path: zap-output.json
+  #       if: always()
 
   # dast-nuclei-scan:
   #   runs-on: ubuntu-20.04
